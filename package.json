@@ -2,6 +2,12 @@
   "name": "@oriflame/constant-moduleids-webpack-plugin",
   "version": "1.0.0",
   "description": "Webpack plugin for generating constant hashed moduleIds for use with DLL plugin.",
+  "keywords": [
+    "webpack",
+    "plugin",
+    "moduleIds",
+    "DLL"
+  ],
   "repository": "https://github.com/Oriflame/constant-moduleids-webpack-plugin",
   "author": "Jan Novotny @ecl1ps",
   "license": "MIT",
