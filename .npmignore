@@ -1,0 +1,7 @@
+﻿dist
+build
+node_modules
+.github
+.vs
+
+package-lock.json
