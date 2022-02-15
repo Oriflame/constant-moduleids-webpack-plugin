@@ -12,9 +12,13 @@ const {
 const createSchemaValidation = require("webpack/lib/util/create-schema-validation");
 const createHash = require("webpack/lib/util/createHash");
 const {
-  getUsedModuleIds,
+  getUsedModuleIds, // In webpack < 5.68.0
+  getUsedModuleIdsAndModules, // In webpack >= 5.68.0
   getShortModuleName,
 } = require("webpack/lib/ids/IdHelpers");
+
+// compat between multiple webpack versions
+const getUsedModuleIdsUniversal = getUsedModuleIds ? getUsedModuleIds : (compilation) => getUsedModuleIdsAndModules(compilation)[0];
 
 /** @typedef {import("../../declarations/plugins/HashedModuleIdsPlugin").HashedModuleIdsPluginOptions} ConstantHashedModuleIdsPluginOptions */
 
@@ -57,7 +61,7 @@ class ConstantHashedModuleIdsPlugin {
               ? this.options.context
               : compiler.context;
 
-            const usedIds = getUsedModuleIds(compilation);
+            const usedIds = getUsedModuleIdsUniversal(compilation);
             const modulesInNaturalOrder = Array.from(modules)
               .filter((m) => {
                 if (!m.needId) return false;
